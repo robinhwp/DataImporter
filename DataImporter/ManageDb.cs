@@ -18,7 +18,7 @@ namespace DataImporter
             {
                 m_conn.Open();
             }
-            catch( Exception ex )
+            catch( Exception )
             {
                 return false;
             }

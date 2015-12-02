@@ -8,5 +8,13 @@ namespace DataImporter
 {
     class ManageFile
     {
+        public ManageFile()
+        {
+
+        }
+        public  void ImportToDb( string fullName )
+        {
+
+        }
     }
 }
