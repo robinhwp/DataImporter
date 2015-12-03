@@ -9,11 +9,19 @@ namespace DataImporter
 {
     class ManageDb
     {
+        static string connString = "";
+        public static void SetConnString( string conn )
+        {
+            connString = conn;
+        }
+        
+
         SqlConnection m_conn = null;
 
-        bool Init( string info )
+        public bool Init()
         {
-            m_conn = new SqlConnection(info);
+
+            m_conn = new SqlConnection( connString );
             try
             {
                 m_conn.Open();
@@ -25,5 +33,23 @@ namespace DataImporter
 
             return true;
         }
+        public ManageDb()
+        {
+
+        }
+
+        public bool Query( string sentens )
+        {
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(sentens, m_conn)) cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch ( Exception )
+            {
+                return false;
+            }
+        }
+
     }
 }
