@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace DataImporter
 {
-    class ManageDb
+    class DbManager
     {
         static string connString = "";
         public static void SetConnString( string conn )
@@ -33,9 +33,12 @@ namespace DataImporter
 
             return true;
         }
-        public ManageDb()
+        ~DbManager()
         {
-
+            if( m_conn != null )
+            {
+                m_conn.Close();
+            }
         }
 
         public bool Query( string sentens )
