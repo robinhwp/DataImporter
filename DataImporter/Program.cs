@@ -11,7 +11,7 @@ namespace DataImporter
         // functions
         static void Main(string[] args)
         {
-            if(args.Length < 6 )
+            if (args.Length < 6 )
             {
                 Console.WriteLine("Error --  not enough parameters");
                 Console.WriteLine("Usage : DataImporter.exe file[path], ip, port, catalog, id, passwd");
@@ -52,9 +52,10 @@ namespace DataImporter
                 Console.ReadLine();
                 return;
             }
-            
-            // 파일이면 해당 파일의 리스트를 읽어서 사용한다.            
-            FileManager.Init(System.IO.Path.GetDirectoryName(listFileName) + "\\error.log");
+
+            // 파일이면 해당 파일의 리스트를 읽어서 사용한다.  
+            System.Diagnostics.Process currentProcess = System.Diagnostics.Process.GetCurrentProcess();
+            FileManager.Init(string.Format("{0}\\{1}.log", System.IO.Directory.GetCurrentDirectory(), currentProcess.ProcessName));
             
             Parallel.For(0, dataFiles.Length, (i) =>
            {
@@ -66,7 +67,6 @@ namespace DataImporter
 
             sw.Stop();
             Console.WriteLine("수행시간 : {0}", sw.ElapsedMilliseconds / 1000.0f);
-            Console.WriteLine(" 수행시간(ToString()) :" + sw.ToString());
             Console.ReadLine();
         }
     }
